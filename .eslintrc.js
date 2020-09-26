@@ -21,12 +21,18 @@ const noUnusedVars = {
     '@typescript-eslint/no-unused-vars': ['warn', { vars: 'all', args: 'after-used', ignoreRestSiblings: false }],
 };
 
+const camelcase = {
+    camelcase: 'off',
+    '@typescript-eslint/camelcase': ['error', { properties: 'never' }],
+};
+
 module.exports = {
     extends: ['airbnb-typescript-prettier'],
     rules: {
         ...noUselessConstructor,
         ...noDefaultExport,
         ...noUnusedVars,
+        ...camelcase,
         'react/destructuring-assignment': 'off',
         '@typescript-eslint/explicit-function-return-type': 'warn',
         '@typescript-eslint/no-explicit-any': 'warn',
@@ -35,5 +41,6 @@ module.exports = {
         'class-methods-use-this': 'warn',
         'no-console': 'off',
         'no-debugger': 'warn',
+        'no-param-reassign': ['error', { props: true, ignorePropertyModificationsFor: ['draft'] }],
     },
 };
