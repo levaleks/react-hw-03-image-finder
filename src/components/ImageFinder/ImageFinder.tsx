@@ -6,6 +6,7 @@ import { ImageGallery } from './ImageGallery';
 import { Button } from './Button';
 import { ImageFinderActions, imageFinderInitialState, imageFinderReducer } from './_core/imageFinderReducer';
 import { Loader } from './Loader';
+import { SEARCH_BAR_MIN_HEIGHT } from './SearchBar/SearchBar.sc';
 
 export const ImageFinder: React.FC = () => {
     const [{ isLoading, query, hits }, dispatch] = useReducer(imageFinderReducer, imageFinderInitialState);
@@ -32,19 +33,17 @@ export const ImageFinder: React.FC = () => {
         }
     }, [query]);
 
-    useEffect(() => {
-        if (!isLoading) {
-            window.scrollTo({
-                top: document.documentElement.scrollHeight,
-                behavior: 'smooth',
-            });
-        }
-    }, [isLoading]);
+    const getRef = useCallback((ref): void => {
+        window.scrollTo({
+            top: ref.current.offsetTop - Number.parseInt(SEARCH_BAR_MIN_HEIGHT, 10) - 20,
+            behavior: 'smooth',
+        });
+    }, []);
 
     return (
         <SImageFinder isFullHeight={!query.q && !hits.length}>
             <SearchBar onSearch={handleSearch} isFullHeight={!query.q && !hits.length} />
-            <ImageGallery images={hits} />
+            <ImageGallery images={hits} perPage={query.per_page} onItemRef={getRef} />
             {isLoading && <Loader />}
             {Boolean(!isLoading && hits.length) && <Button onClick={handleLoadMore}>Load more</Button>}
         </SImageFinder>
