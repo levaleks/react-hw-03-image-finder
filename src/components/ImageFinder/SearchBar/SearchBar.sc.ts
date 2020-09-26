@@ -1,4 +1,6 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
+
+export const SEARCH_BAR_MIN_HEIGHT = '64px';
 
 export const SSearchBar = styled.header`
     top: 0;
@@ -8,7 +10,7 @@ export const SSearchBar = styled.header`
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: ${(props): string => (props.isFullHeight ? '100vh' : '64px')};
+    min-height: ${(props): string => (props.isFullHeight ? '100vh' : SEARCH_BAR_MIN_HEIGHT)};
     padding: 12px 24px;
     color: #fff;
     background: ${(props): string =>
