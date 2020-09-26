@@ -16,7 +16,7 @@ export const imageFinderInitialState: ImageFinderState = {
         image_type: 'photo',
         orientation: 'horizontal',
         page: '1',
-        per_page: 12,
+        per_page: 15,
     },
     hits: [],
     isLoading: false,
