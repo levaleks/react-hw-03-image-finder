@@ -22,7 +22,7 @@ export const ImageFinder: React.FC = () => {
     }, [query.page]);
 
     useEffect(() => {
-        const findImages = async () => {
+        const findImages = async (): Promise<void> => {
             const { hits: res } = await pixabeyAPI.findImages(query);
 
             dispatch({ type: ImageFinderActions.UPDATE_HITS, payload: { hits: res || [] } });
